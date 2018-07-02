@@ -19,7 +19,8 @@ router.post('/', async (req,res) => {
 
     if(!validPassword) return res.status(400).send("Invailid user id or password");
 
-    const token = jwt.sign({_id : user._id, name : user.name}, config.get("jwtprivateKey"));
+   // const token = jwt.sign({_id : user._id, name : user.name}, config.get("jwtprivateKey"));
+   const token = user.generateAuthToken();
     res.send(token);
 
 });
