@@ -1,3 +1,5 @@
+
+require('express-async-errors');
 const {Genre, validateGenre} = require('../model/genre');
 const auths = require('../middleware/auths');
 const admin = require('../middleware/admin');
@@ -5,12 +7,10 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const genre =  await Genre.find();
-    if(!genre) {
-        return res.status(200).send('genre data is not available in db');
-    }
+     
+    const genre =  await Genre.find();  
     res.send(genre);
-
+    
 } );
 router.get('/:id',   async (req, res)=> {
     const genre = await Genre.findById(req.params.id);
