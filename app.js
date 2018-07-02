@@ -1,5 +1,5 @@
 const express = require('express');
-
+const config = require('config');
 const app = express();
 const customers = require('./routes/customers');
 const genres = require('./routes/genres');
@@ -14,6 +14,11 @@ mongoose.connect('mongodb://localhost/moviesRental')
 .then(() => console.log('conneted to mongodb database successfully...'))
 .catch(err => console.log('connection err is :', err));
 
+if(!config.get('jwtprivateKey')){
+    console.log('Fatal Error: jwtprivatekey is not defined');
+    process.exit(1);
+}
+
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use('/api/customers', customers);
@@ -22,6 +27,7 @@ app.use('/api/movies', movies);
 app.use('/api/rental', rental);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+
 
 const port = process.env.PORT || 3000;
 
