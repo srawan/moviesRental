@@ -6,19 +6,15 @@ const admin = require('../middleware/admin');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-     
+router.get('/', async (req, res) => { 
     const genre =  await Genre.find();  
     res.send(genre);
-    
 } );
+
 router.get('/:id',   async (req, res)=> {
     const genre = await Genre.findById(req.params.id);
     if(!genre) return res.status(404).send("genre was not found with given id");
-
-    res.send(genre);
-
-
+      res.send(genre);
 });
 
 router.post('/', auths, async (req, res) => {
@@ -31,6 +27,7 @@ router.post('/', auths, async (req, res) => {
    await genre.save();
     res.send(genre);
 });
+
 router.put('/:id', async (req, res)=> {
     const genre =  await Genre.findByIdAndUpdate(req.params.id, {name : req.body.name});
     if(!genre) return res.status(404).send("genre was not found with given id");
