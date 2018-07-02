@@ -10,19 +10,17 @@ const fawn = require('fawn');
 fawn.init(mongoose);
 router.get('/', async (req, res)=> {
     const rental = await Rental.find();
-
     res.send(rental);
-
 });
+
 router.get('/:id', async (req, res) => {
     const rental = await Rental.findById(req.params.id);
     if(!rental) return res.status(404).send("invailid id");
-
     res.send(rental);
 });
+
 router.post('/', async (req, res) => {
     const {error } = validateRental(req.body);
-    
     if(error) return res.status(400).send(error.details[0].message);
 
     const customer = await Customer.findById(req.body.customerId);
@@ -48,7 +46,7 @@ router.post('/', async (req, res) => {
             dateReturn: req.body.dateReturn,
             rentalFee : req.body.rentalFee
     });
-    //await rental.save();
+    
     try{
         new fawn.Task()
         .save('rentals', rental)
