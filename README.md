@@ -10,7 +10,7 @@ how to autherization & Authenticate to user for access? how to implement two pha
 how to run this app?
     1:- clone this app.
     2:- install npm . using command (npm install).
-    3:- set the set the private key :  export movieRental_privateKey=mysecretkey ( on mac), or  set movieRental_privateKey=mysecretkey for window.
+    3:- set the set the private key :  export movieRental_privateKey=mysecretkey ( on mac), or  set movieRental_privateKey=mysecrgitnetkey for window.
     4:- run for console using command : node app.js.
 
     how to test ?
